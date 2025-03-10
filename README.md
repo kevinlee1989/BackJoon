@@ -5,7 +5,7 @@
 
 두번째 숫자열을 string타입으로 받고 숫자 - '0' 으로 다시 한자리 정수형으로 변환.
 
-# 설탕배달
+# 설탕배달 - DP
 
 주어진 숫자가 5킬로그램 과 3킬로그램 가방으로 들고 갈수있는지,
 들고갈수있다면 더 적은 개수의 봉지를 사용
@@ -25,7 +25,7 @@ ex) 1, aba, abab, abcabc, aaaba -> 0  전부다 해당조건을 불만족
 
 unordered_set으로 해당 문자열을 저장하고 prev에 전 문자를 저장하여 if(c != prev) -> if(seen.find(c) == seen.end()) find = false 으로 char_set에서 해당문자를 찾지못한것이다. -> else find = true; break; 으로 해당문자가 그전에 이미 나왔던 문자라면 조건 불만족.
 
-# 피보나치 0 과 1 몇번나오는지 계산
+# 피보나치 0 과 1 몇번나오는지 계산 - DP
 
 입력값을 넣으면 몇번의 0 과 1 을 도달하게되는지 다른 DP를 사용해서 풀어야한다. 
 ![image](https://github.com/user-attachments/assets/4cc1b274-53fc-4b9f-ac1a-2f7b5df85687)
@@ -42,4 +42,17 @@ int dp[41][2] = {0}; 2차원의 배열을 선언해줘서 초기값 0 과 1 을 
         dp[i][1] = dp[i - 1][1] + dp[i - 2][1];
     }
 
-    
+
+# LIS(가장 긴 증가하는 부분 수열 구하기) - DP
+
+![image](https://github.com/user-attachments/assets/db2ec14e-98ae-48b0-9fdf-9dab8f6493e1)
+
+O(n^2)으로 만들어 for i -> n 까지 for j -> i 까지 계속해서 앞과뒤의 숫자를 비교하며 dp[i] = max(dp[i],dp[j]+1) 로 갱신시켜준다.
+
+for(int i = 1; i < n; i++){
+    for(int j = 0; j < i; j++){
+        if(scores[i] > scores[j]) dp[i] = max(dp[i], dp[j]+1);
+    }
+    maxLength = max(maxLength, dp[i]);
+}
+
