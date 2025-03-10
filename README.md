@@ -24,3 +24,22 @@ ex) 1, aba, abab, abcabc, aaaba -> 0  전부다 해당조건을 불만족
 ![image](https://github.com/user-attachments/assets/848b8b24-8774-43ef-a96d-7779c116a675)
 
 unordered_set으로 해당 문자열을 저장하고 prev에 전 문자를 저장하여 if(c != prev) -> if(seen.find(c) == seen.end()) find = false 으로 char_set에서 해당문자를 찾지못한것이다. -> else find = true; break; 으로 해당문자가 그전에 이미 나왔던 문자라면 조건 불만족.
+
+# 피보나치 0 과 1 몇번나오는지 계산
+
+입력값을 넣으면 몇번의 0 과 1 을 도달하게되는지 다른 DP를 사용해서 풀어야한다. 
+![image](https://github.com/user-attachments/assets/4cc1b274-53fc-4b9f-ac1a-2f7b5df85687)
+
+int dp[41][2] = {0}; 2차원의 배열을 선언해줘서 초기값 0 과 1 을 선언해주고 40까지의 숫자들을 피보나치 DP 처럼 그대로 적용하여 계산해주면된다. 
+
+dp[0][0] = 1;  // fibonacci(0) 호출 시 0이 1번 출력
+    dp[0][1] = 0;  // fibonacci(0) 호출 시 1이 0번 출력
+    dp[1][0] = 0;  // fibonacci(1) 호출 시 0이 0번 출력
+    dp[1][1] = 1;  // fibonacci(1) 호출 시 1이 1번 출력
+
+    for (int i = 2; i <= 40; i++) {
+        dp[i][0] = dp[i - 1][0] + dp[i - 2][0];
+        dp[i][1] = dp[i - 1][1] + dp[i - 2][1];
+    }
+
+    
