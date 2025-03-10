@@ -49,10 +49,10 @@ int dp[41][2] = {0}; 2차원의 배열을 선언해줘서 초기값 0 과 1 을 
 
 O(n^2)으로 만들어 for i -> n 까지 for j -> i 까지 계속해서 앞과뒤의 숫자를 비교하며 dp[i] = max(dp[i],dp[j]+1) 로 갱신시켜준다.
 
-for(int i = 1; i < n; i++){
-    for(int j = 0; j < i; j++){
-        if(scores[i] > scores[j]) dp[i] = max(dp[i], dp[j]+1);
+    for(int i = 1; i < n; i++){
+        for(int j = 0; j < i; j++){
+            if(scores[i] > scores[j]) dp[i] = max(dp[i], dp[j]+1);
+        }
+        maxLength = max(maxLength, dp[i]);
     }
-    maxLength = max(maxLength, dp[i]);
-}
 
