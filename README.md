@@ -58,8 +58,8 @@ O(n^2)으로 만들어 for i -> n 까지 for j -> i 까지 계속해서 앞과�
 
 # 시간초과 문제를 해결하기위해
 
-ios::sync_with_stdio(false); 
-cin.tie(NULL); 
+    ios::sync_with_stdio(false); 
+    cin.tie(NULL); 
 
 // cin와 cout은 내부적으로 C의 scanf() 와 printf()와 버퍼를 공유하기때문에 stdin과 stdout의 버퍼를 동기화하는과정에서 시간이 많이걸림 그 동기화 과정을 끄게함.
 
