@@ -100,3 +100,74 @@ ex) 6 9 5 7 4 -> 0 0 2 2 4 , 5랑 7의 높이를 가진 송신탑은 왼쪽으�
 
         s.push({heights[i], i});
     }
+
+# DFS와 BFS (그래프)
+
+    vector<vector<int>> graph;
+    vector<bool> visited_bfs;
+    vector<bool> visited_dfs;
+
+    // recursive call for dfs
+    void dfs(int node){
+        cout << node << " ";
+        visited_dfs[node] = true;
+
+        for(int next : graph[node]){
+            if(!visited_dfs[next]){
+                dfs(next);
+            }
+        }
+    }
+    // queue for bfs
+    void bfs(int starting){
+        queue<int> q;
+        q.push(starting);
+        visited_bfs[starting] = true;
+
+        while(!q.empty()){
+            int node = q.front();
+            cout << node << " ";
+            q.pop();
+
+            for(int next : graph[node]){
+                if(!visited_bfs[next]){
+                    q.push(next);
+                    visited_bfs[next] = true;
+                }
+            }
+        }
+
+    }
+
+    int main(){
+        int V, E, starting; // 정점, 간선, 시작 노드 
+        cin >> V >> E >> starting;
+
+        graph.resize(V+1); // 정점에 맞게 크기 조절
+        visited_bfs.resize(V+1, false);
+        visited_dfs.resize(V+1, false);
+
+        // 그래프 간선 추가
+        for(int i = 0; i < E; i++){
+            int u, v;
+            cin >> u >> v;
+
+            graph[u].push_back(v);
+            graph[v].push_back(u);
+        }
+
+        // 작은 숫자부터 방문할수있게 각 정점의 이웃노드들을 오름차순으로 정리한다. 
+        for(int i = 1; i <= V; i++){
+            sort(graph[i].begin(), graph[i].end());
+        }
+
+        dfs(starting);
+        cout << endl;
+
+        bfs(starting);
+        cout << endl;
+        
+        return 0;        
+    }
+
+dfs 는 재귀적으로 함수를 call 하고 bfs는 queue를 사용하여 이웃노드들을 먼저 방문할수있게 한다.
